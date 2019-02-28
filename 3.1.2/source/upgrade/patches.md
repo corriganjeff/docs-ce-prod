@@ -80,9 +80,9 @@ echo "Moving towards normal opendj start now..."
 
 ```
 
-#### An extra checking
+#### An extra precaution to ensure data integrity when impacted by OpenDJ-2969
 
-It's worthy to compare the amount of entries between all replicated trees of nodes after you are done with above steps. There might be situation when you might end up seeing a big difference between nodeA and nodeB even though there is no error in replication operation. In such case, a good practice is to disable/re-enable whole replication operation. 
+It is important to compare the amount of entries between all replicated trees of the nodes prior to, and after the steps have been completed. For example, querying the numsubordinates against ou=people on the individual nodes. It is possible that a situation could arise where a significant difference exists between nodeA and nodeB ..., even though there aren't any clear errors in the recent replication log data. In such case, a good practice is to disable/re-enable whole replication operation as part of the patch process. This behavior could occur, for example, if the opendj-2969 issue existed in an environment where multiple restarts have occured beyond the default purge setting for opendj (typically 3 days), and prior to an administrator noticing that a problem existed. In this scenario where a remarkable difference in data quantity expecations exists, it is important to note which node(s) have the most recent data and use those as the new masters when re-initializing secondary master nodes. 
 
 ## Publicly viewable oxTrust pages
 
